@@ -35,6 +35,7 @@ jobs:
   - job: build_windows
     pool:
       vmImage: "vs2017-win2016"
+      rustup_toolchain: stable
     
     steps:
     - script: |
