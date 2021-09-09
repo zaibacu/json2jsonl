@@ -19,7 +19,7 @@ jobs:
 
   - job: build_macos
     pool:
-      vmImage: "macos-11.5"
+      vmImage: "macos-latest"
     
     steps:
     - script: curl https://sh.rustup.rs -sSf | sh -s -- -y
