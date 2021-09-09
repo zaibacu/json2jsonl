@@ -13,3 +13,6 @@ jobs:
     - script: |
         cargo build --release
       displayName: 'Build for Linux'
+  
+    - publish: $(System.DefaultWorkingDirectory)/target/release/json2jsonl
+      artifact: json2jsonl-linux
