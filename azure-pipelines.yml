@@ -1,0 +1,15 @@
+trigger:
+- main
+
+jobs:
+  - job: build_linux
+    pool:
+      vmImage: ubuntu-latest
+
+    steps:
+    - script: curl https://sh.rustup.rs -sSf | sh
+      displayName: 'Install Cargo'
+
+    - script: |
+        cargo build --release
+      displayName: 'Build for Linux'
