@@ -47,5 +47,5 @@ jobs:
         cargo build --release
       displayName: 'Build for Windows'
   
-    - publish: $(System.DefaultWorkingDirectory)/target/release/json2jsonl
+    - publish: $(System.DefaultWorkingDirectory)/target/release/json2jsonl.exe
       artifact: json2jsonl-windows
