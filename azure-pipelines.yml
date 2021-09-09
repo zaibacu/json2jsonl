@@ -7,7 +7,7 @@ jobs:
       vmImage: ubuntu-latest
 
     steps:
-    - script: curl https://sh.rustup.rs -sSf | sh -y
+    - script: curl https://sh.rustup.rs -sSf | sh -s -- -y
       displayName: 'Install Cargo'
 
     - script: |
