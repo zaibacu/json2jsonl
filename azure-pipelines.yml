@@ -1,0 +1,51 @@
+trigger:
+- main
+
+jobs:
+  - job: build_linux
+    pool:
+      vmImage: ubuntu-latest
+
+    steps:
+    - script: curl https://sh.rustup.rs -sSf | sh -s -- -y
+      displayName: 'Install Cargo'
+
+    - script: |
+        cargo build --release
+      displayName: 'Build for Linux'
+  
+    - publish: $(System.DefaultWorkingDirectory)/target/release/json2jsonl
+      artifact: json2jsonl-linux
+
+  - job: build_macos
+    pool:
+      vmImage: "macos-latest"
+    
+    steps:
+    - script: curl https://sh.rustup.rs -sSf | sh -s -- -y
+      displayName: 'Install Cargo'
+
+    - script: |
+        cargo build --release
+      displayName: 'Build for MacOS'
+  
+    - publish: $(System.DefaultWorkingDirectory)/target/release/json2jsonl
+      artifact: json2jsonl-macos
+    
+  - job: build_windows
+    pool:
+      vmImage: "vs2017-win2016"
+      rustup_toolchain: stable
+    
+    steps:
+    - script: |
+        curl -sSf -o rustup-init.exe https://win.rustup.rs
+        rustup-init.exe -y
+        echo "##vso[task.setvariable variable=PATH;]%PATH%;%USERPROFILE%\.cargo\bin"
+
+    - script: |
+        cargo build --release
+      displayName: 'Build for Windows'
+  
+    - publish: $(System.DefaultWorkingDirectory)/target/release/json2jsonl.exe
+      artifact: json2jsonl-windows
