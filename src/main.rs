@@ -47,7 +47,6 @@ fn main() {
     loop {
         match reader.read::<Value>() {
             Ok(value) => {
-                println!("Value: {}", value);
                 write!(out_file, "{}\n", value);
             },
             Err(ref e) if e.kind() == ErrorKind::UnexpectedEof => break,
