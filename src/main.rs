@@ -47,6 +47,7 @@ fn main() {
     loop {
         match reader.read::<Value>() {
             Ok(value) => {
+                println!("Value: {}", value);
                 write!(out_file, "{}\n", value);
             },
             Err(ref e) if e.kind() == ErrorKind::UnexpectedEof => break,
@@ -70,19 +71,4 @@ fn main() {
             Err(e) => eprintln!("Error: {}, kind: {:?}", e, e.kind()),
         }
     }
-    /*
-    let root: Vec<Value> = reader.read().unwrap();
-    for value in root {
-        write!(out_file, "{}\n", value);
-    }*/
-    /*for value in stream {
-        println!("{}", value.unwrap());
-    }*/
-
-    /*let de = Deserializer::from_slice(&buffer);
-    let mut stream = de.into_iter::<Value>();
-
-    for value in stream {
-        println!("{}", value.unwrap());
-    }*/
 }
